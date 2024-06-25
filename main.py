@@ -2,6 +2,7 @@ import os
 import re
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -55,9 +56,16 @@ for key, value in sorted_dict.items():
 #-------------------------
 # UPLOAD MEMOS TO HABANHA
 #-------------------------
-webdriver_service = Service('C:\\Program Files\\chromedriver-win64\\chromedriver.exe')
+current_path = os.getcwd()
+driver_path = os.path.join(current_path, "driver\\chromedriver.exe")
+chrome_binary_path = os.path.join(current_path, "driver\\chrome-win64\\chrome.exe")
+webdriver_service = Service(driver_path)
 
-driver = webdriver.Chrome(service=webdriver_service)
+# Set up Chrome options
+chrome_options = Options()
+chrome_options.binary_location = chrome_binary_path
+
+driver = webdriver.Chrome(service=webdriver_service,options=chrome_options)
 
 # wait up to 10 seconds
 wait = WebDriverWait(driver, 10)
@@ -89,6 +97,8 @@ for key, value in sorted_dict.items():
     xpath = "/html/body/div[4]/div[3]/form/div[2]/div/div[2]/div[2]/div[4]/div[1]/div/p"
     element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
     element.send_keys(value)
+
+    time.sleep(600)
 
     #click post
     xpath = '//*[@id="board_container"]/div[1]/div/div[2]/button'
