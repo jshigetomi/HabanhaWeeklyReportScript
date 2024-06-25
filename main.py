@@ -98,8 +98,6 @@ for key, value in sorted_dict.items():
     element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
     element.send_keys(value)
 
-    time.sleep(600)
-
     #click post
     xpath = '//*[@id="board_container"]/div[1]/div/div[2]/button'
     element = wait.until(EC.element_to_be_clickable((By.XPATH, xpath)))
