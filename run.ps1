@@ -47,7 +47,7 @@ if (Test-Path -Path $chrome_driver_path) {
     Write-Host "Chrome driver is already installed." -ForegroundColor Green
 } else {
     Write-Host "Chrome driver is not installed. Installing Chrome driver..." -ForegroundColor Yellow
-    New-Item -Path $chrome_driver_path -Name "driver" -ItemType Directory
+    New-Item -Name "driver" -ItemType Directory
     # Download and install Chrome driver
     Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/LATEST_RELEASE" -OutFile "chromedriver_version.txt"
     $chrome_driver_version = Get-Content "chromedriver_version.txt"
